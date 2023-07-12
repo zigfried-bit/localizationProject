@@ -1,3 +1,13 @@
+<!--
+ * @Author: zigfried 3572931733@qq.com
+ * @Date: 2023-07-07 16:32:54
+ * @LastEditors: zigfried 3572931733@qq.com
+ * @LastEditTime: 2023-07-11 14:35:26
+ * @FilePath: /localizationProject/src/LocalizationSystemBuild.md
+ * @Description: 
+ * 
+ * Copyright (c) 2023 by zigfried, All Rights Reserved. 
+-->
 [参考](https://zhuanlan.zhihu.com/p/104791974)
 [github](https://github.com/Little-Potato-1990/localization_in_auto_driving)
 
@@ -34,3 +44,11 @@ rosrun tf tf_monitor
 tf_monitor可以查看tf树的关系
 ## 03 软件框架
 1. 每一类信息的订阅和发布封装成一个类，它的callback做为类内函数存在，这样在node文件中想要订阅这个消息的时候只需要在初始化的时候定义一个类的对象，就可以在正常使用过程中从类内部直接取它的数据了。
+2. 每种传感器专门封装了对应的数据结构，在sensor_data文件夹下，目前有imu_data.hpp、gnss_data.hpp、cloud_data.hpp分别对应IMU数据、GNSS数据、点云数据。
+3. 这种封装就是为了适应一开始提到的接口功能，同时也可以配合第一步封装的订阅类和发布类使用，把订阅的数据直接封装好再供主程序取，这样封闭性更强。
+4. 缓冲区机制：这种机制完全是由于ROS自身的缺陷导致的。这个问题和ROS订阅信息时缓冲区读取有关，ROS在每次循环时，会逐个遍历各个subscriber的缓冲区，并且把缓冲区中的数据读完，不管有多少。我们在subscriber的callback中解析数据的时候，一般都是把数据赋给一个变量，然后在融合的时候使用最后更新的值作为输入。
+
+> 这样看好像没什么问题，问题在于当融合算法处理时间比较长，超出了传感器信息的发送周期的时候，未被接收的数据会被放在每个subscriber对应的缓冲区中，等当前融合步骤处理完之后，下次ros从缓冲区中读取数据的时候，会先把gnss的数据读完，然后再读lidar的数据，这就导致，我们再一次进入lidar_callback函数时，使用的gnss_data已经不是和这个lidar_data同一时刻的数据了，而是它后面时刻的数据。
+
+“会先把gnss的数据读完，然后再读lidar的数据”感觉这句话描述不准确，ros的回调函数队列并没有绝对的先后，各回调函数的数量大概和传感器的频率是对应的。总之，如果不使用缓冲区，每次只取最新的值，很容易出现时间戳对不上的情况，或者说有更接近的时间匹配但是没有用上。
+

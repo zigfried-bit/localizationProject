@@ -1,0 +1,19 @@
+/*
+ * @Author: zigfried 3572931733@qq.com
+ * @Date: 2023-07-11 18:04:09
+ * @LastEditors: zigfried 3572931733@qq.com
+ * @LastEditTime: 2023-07-11 18:04:17
+ * @FilePath: /localizationProject/src/lidar_localization/include/lidar_localization/global_definition/global_definition.h.in
+ * @Description: 
+ * 
+ * Copyright (c) 2023 by zigfried, All Rights Reserved. 
+ */
+#ifndef LIDAR_LOCALIZATION_GLOBAL_DEFINITION_H_IN_
+#define LIDAR_LOCALIZATION_GLOBAL_DEFINITION_H_IN_
+
+#include <string>
+
+namespace lidar_localization {
+const std::string WORK_SPACE_PATH = "@WORK_SPACE_PATH@";
+}
+#endif
