@@ -2,7 +2,7 @@
  * @Author: zigfried 3572931733@qq.com
  * @Date: 2023-07-09 20:25:02
  * @LastEditors: zigfried 3572931733@qq.com
- * @LastEditTime: 2023-07-13 16:22:22
+ * @LastEditTime: 2023-07-13 16:24:36
  * @FilePath: /localizationProject/README.md
  * @Description: 
  * 
@@ -57,7 +57,9 @@ tf可以考虑升级一下tf2
 小细节：global_defination.cmake
 这个definition拼错了
 
-参照tag4.0添加前端里程计时遇到"multiple definition of `main';"
+参照tag4.0添加前端里程计时遇到"multiple definition of 'main';"
 原因是CMakeLists.txt中使用了`file(GLOB_RECURSE ALL_SRCS "*.cpp")`
+
 如果编译生成2个及以上可执行文件就会报错。
+
 最简单的办法是：将另外一个暂时用不到的文件删掉即可
