@@ -2,7 +2,7 @@
  * @Author: zigfried 3572931733@qq.com
  * @Date: 2023-07-07 16:32:54
  * @LastEditors: zigfried 3572931733@qq.com
- * @LastEditTime: 2023-07-11 14:35:26
+ * @LastEditTime: 2023-07-12 10:51:08
  * @FilePath: /localizationProject/src/LocalizationSystemBuild.md
  * @Description: 
  * 
@@ -52,3 +52,4 @@ tf_monitor可以查看tf树的关系
 
 “会先把gnss的数据读完，然后再读lidar的数据”感觉这句话描述不准确，ros的回调函数队列并没有绝对的先后，各回调函数的数量大概和传感器的频率是对应的。总之，如果不使用缓冲区，每次只取最新的值，很容易出现时间戳对不上的情况，或者说有更接近的时间匹配但是没有用上。
 
+## 04 前端里程计

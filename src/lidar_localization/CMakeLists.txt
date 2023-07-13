@@ -39,5 +39,8 @@ list(APPEND ALL_TARGET_LIBRARIES ${glog_LIBRARIES})
 # 源文件
 file(GLOB_RECURSE ALL_SRCS "*.cpp")
 
-add_executable(test_frame_node src/apps/test_frame_node.cpp ${ALL_SRCS})
-target_link_libraries(test_frame_node ${catkin_LIBRARIES} ${ALL_TARGET_LIBRARIES})
+# add_executable(test_frame_node src/apps/test_frame_node.cpp ${TARGET_CPP})
+# target_link_libraries(test_frame_node ${catkin_LIBRARIES} ${ALL_TARGET_LIBRARIES})
+
+add_executable(front_end_node src/apps/front_end_node.cpp ${ALL_SRCS})
+target_link_libraries(front_end_node ${catkin_LIBRARIES} ${ALL_TARGET_LIBRARIES})
