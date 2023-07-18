@@ -2,7 +2,7 @@
  * @Author: zigfried 3572931733@qq.com
  * @Date: 2023-07-09 20:25:02
  * @LastEditors: zigfried 3572931733@qq.com
- * @LastEditTime: 2023-07-13 16:24:36
+ * @LastEditTime: 2023-07-18 09:22:55
  * @FilePath: /localizationProject/README.md
  * @Description: 
  * 
@@ -63,3 +63,8 @@ tf可以考虑升级一下tf2
 如果编译生成2个及以上可执行文件就会报错。
 
 最简单的办法是：将另外一个暂时用不到的文件删掉即可
+
+tag4.0有些语句是多余的，比如front_end_node.cpp中的front_end_ptr->SetPredictPose(odometry_matrix);
+甚至SetPredictPose这个函数本身就对程序功能没有任何作用
+
+tag5.0是代码优化部分，但是优化之后还是和原来一样慢...

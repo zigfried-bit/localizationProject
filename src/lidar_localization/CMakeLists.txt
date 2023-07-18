@@ -7,6 +7,18 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   nav_msgs
   tf
+  message_generation 
+  std_srvs
+)
+
+add_service_files(
+   FILES
+   saveMap.srv
+)
+
+generate_messages(
+   DEPENDENCIES
+   std_msgs
 )
 
 find_package (GeographicLib REQUIRED)
@@ -36,6 +48,10 @@ find_package(PkgConfig REQUIRED)
 pkg_check_modules(glog REQUIRED libglog)
 list(APPEND ALL_TARGET_LIBRARIES ${glog_LIBRARIES})
 
+# 没有手动安装过yaml-cpp
+pkg_check_modules(YAML_CPP REQUIRED yaml-cpp)
+include_directories(${YAML_CPP_INCLUDEDIR})
+list(APPEND ALL_TARGET_LIBRARIES ${YAML_CPP_LIBRARIES})
 # 源文件
 file(GLOB_RECURSE ALL_SRCS "*.cpp")
 
